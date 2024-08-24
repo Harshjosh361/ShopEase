@@ -6,7 +6,8 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://shopease-gxkt.onrender.com', // the address of your backend server
+        target: 'https://shopease-gxkt.onrender.com',  // the address of your backend server
+        changeOrigin: true,
       }
     }
   },
