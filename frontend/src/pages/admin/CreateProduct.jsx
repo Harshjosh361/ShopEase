@@ -5,6 +5,7 @@ import { Select } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { API_URL } from "../../config";
 const { Option } = Select;
 function CreateProduct() {
   const navigate = useNavigate();
@@ -16,11 +17,12 @@ function CreateProduct() {
   const [quantity, setQuantity] = useState("");
   const [shipping, setShipping] = useState("");
   const [photo, setPhoto] = useState("");
+  
 
   //get all category
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/get-category");
+      const { data } = await axios.get(`${API_URL}api/v1/category/get-category`);
       if (data?.success) {
         setCategories(data?.category);
       }
@@ -46,7 +48,7 @@ function CreateProduct() {
       productData.append("photo", photo);
       productData.append("category", category);
       const { data } = axios.post(
-        "/api/v1/products/create-product",
+        `${API_URL}api/v1/products/create-product`,
         productData
       );
       if (data?.success) {

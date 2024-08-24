@@ -15,8 +15,8 @@ function Spinner() {
     return () => clearInterval(interval);
   }, [count,navigate,location]);
   return (
-    <div className="justify-center">
-  <div className="spinner-border center" role="status">
+    <div className="justify-center flex items-center">
+  <div className="spinner-border center mt-50" role="status">
     
   </div>
   <span className="sr-only">Loading...</span>

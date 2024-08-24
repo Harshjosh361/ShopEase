@@ -5,6 +5,7 @@ import AdminMenu from '../../component/Layout/AdminMenu'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { Select } from 'antd'
+import { API_URL } from "../../config";
 import { toast } from 'react-hot-toast'
 const { Option } = Select
 
@@ -27,7 +28,7 @@ function UpdateProduct() {
   const getSingleProduct = async () => {
     try {
       const { data } = await axios.get(
-        `/api/v1/products/get-product/${params.slug}`
+        `${API_URL}api/v1/products/get-product/${params.slug}`
       );
       setName(data.product.name);
       setId(data.product._id);
@@ -48,7 +49,7 @@ function UpdateProduct() {
   //get all category
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/get-category");
+      const { data } = await axios.get(`${API_URL}api/v1/category/get-category`);
       if (data?.success) {
         setCategories(data?.category);
       }
@@ -74,7 +75,7 @@ function UpdateProduct() {
       photo && productData.append("photo", photo);
       productData.append("category", category);
       const { data } = axios.put(
-        `/api/v1/products/update-product/${id}`,
+        `${API_URL}api/v1/products/update-product/${id}`,
         productData
       );
       if (data?.success) {
@@ -95,7 +96,7 @@ function UpdateProduct() {
       let answer = window.prompt("Are You Sure want to delete this product ? ");
       if (!answer) return;
       const { data } = await axios.delete(
-        `/api/v1/products/delete-product/${id}`
+        `${API_URL}api/v1/products/delete-product/${id}`
       );
       toast.success("Product Deleted Successfully");
       navigate("/dashboard/admin/products");
@@ -157,7 +158,7 @@ return (
               ) : (
                 <div className="text-center">
                   <img
-                    src={`/api/v1/products/product-photo/${id}`}
+                    src={`${API_URL}api/v1/products/product-photo/${id}`}
                     alt="product_photo"
                     height={"200px"}
                     className="img img-responsive"

@@ -4,13 +4,14 @@ import AdminMenu from "../../component/Layout/AdminMenu";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { API_URL } from "../../config";
 
 function Products() {
   const [products, setProducts] = useState([]);
   //getall products
   const getAllProducts = async () => {
     try {
-      const { data } = await axios.get("/api/v1/products/get-products");
+      const { data } = await axios.get(`${API_URL}api/v1/products/get-products`);
       setProducts(data.products);
     } catch (error) {
       console.log(error);
@@ -41,7 +42,7 @@ function Products() {
               >
                 <div className="card m-2" style={{ width: "18rem" }}>
                   <img
-                    src={`/api/v1/products/product-photo/${p._id}`}
+                    src={`${API_URL}api/v1/products/product-photo/${p._id}`}
                     className="card-img-top"
                     alt={p.name}
                   />

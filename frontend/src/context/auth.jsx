@@ -1,4 +1,5 @@
 import axios from 'axios';
+import React from 'react';
 import {useState, createContext, useContext, useEffect} from 'react';
 
 // 1.CREATE A CONTEXT

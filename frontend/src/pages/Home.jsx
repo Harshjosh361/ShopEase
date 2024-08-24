@@ -6,6 +6,7 @@ import { useCart } from '../context/cart';
 import { useNavigate } from "react-router-dom";
 import { Prices } from "../component/Prices";
 import { toast } from "react-hot-toast";
+import {API_URL} from "../config"
 
 function Home() {
   const navigate = useNavigate();
@@ -15,13 +16,15 @@ function Home() {
   const [checked, setChecked] = useState([]); // categories
   const [radio, setRadio] = useState(0); // price range
   const [cart, setCart] = useCart();
+  
 
   //get all categories
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/get-category");
+      // destructuring data from response object
+      const { data } = await axios.get(`${API_URL}api/v1/category/get-category`);
       if (data?.success) {
-        setCategories(data?.category);
+        setCategories(data.category);
       }
     } catch (error) {
       console.log(error);
@@ -44,7 +47,7 @@ function Home() {
   const getAllProducts = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`/api/v1/products/get-products`);
+      const { data } = await axios.get(`${API_URL}api/v1/products/get-products`);
       setLoading(false);
       setProducts(data.products);
     } catch (error) {
@@ -54,6 +57,8 @@ function Home() {
   };
 
   const handleFilter = (value, id) => {
+    // not a good practise to use state variable directly
+    // so we are using spread operator to create a new array
     let all = [...checked];
     if (value) {
       all.push(id);
@@ -67,7 +72,7 @@ function Home() {
   // get filtered products
   const filterProduct = async () => {
     try {
-      const { data } = await axios.post(`/api/v1/products/product-filters`, { checked, radio });
+      const { data } = await axios.post(`${API_URL}api/v1/products/product-filters`, { checked, radio });
       setProducts(data?.products);
     } catch (error) {
       console.log(error);
@@ -116,7 +121,7 @@ function Home() {
               <div className="col-md-3 mb-2" key={p._id}>
                 <div className="card m-2">
                   <img
-                    src={`/api/v1/products/product-photo/${p._id}`}
+                    src={`${API_URL}api/v1/products/product-photo/${p._id}`}
                     className="card-img-top"
                     alt={p.name}
                   />

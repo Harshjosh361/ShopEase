@@ -1,7 +1,7 @@
 import "./App.css";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Contact from "./pages/Contact";
+import React from "react";
 import Pagenotfound from "./pages/Pagenotfound";
 import Policy from "./pages/Policy";
 import { Routes, Route } from "react-router-dom";
@@ -19,6 +19,7 @@ import Products from "./pages/admin/Products";
 import UpdateProduct from "./pages/admin/UpdateProduct";
 import ProductDetails from "./pages/ProductDetails";
 import CartPage from "./pages/CartPage";
+
 function App() {
   return (
     <>
@@ -27,7 +28,6 @@ function App() {
         <Route path="/cart" element={<CartPage/>} />
         <Route path="/product/:slug" element={<ProductDetails/>} />
         <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<Pagenotfound />} />
         <Route path="/policy" element={<Policy />} />
         <Route path="/category" element={<Category />} />

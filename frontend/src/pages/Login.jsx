@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate,useLocation } from "react-router-dom";
 import { useAuth } from "../context/auth";
+import {API_URL} from "../config"
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -17,7 +18,7 @@ function Login() {
     e.preventDefault();
     const user = { email, password };
     console.log(user);
-    const res = await axios.post("/api/v1/auth/login", user);
+    const res = await axios.post(`${API_URL}api/v1/auth/login`, user);
     if (res.data.success) {
       console.log(res);
       toast.success(res.data.message);

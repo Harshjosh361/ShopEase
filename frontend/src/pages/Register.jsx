@@ -3,6 +3,7 @@ import Layout from "../component/Layout/Layout";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import {useNavigate} from "react-router-dom";
+import {API_URL} from "../config"
 
 function Register() {
   const [name, setName] = useState("");
@@ -11,7 +12,7 @@ function Register() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   // used to navigate to defined page
-  const navigate = useNavigate('/login');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +20,7 @@ function Register() {
     const user = { name, email, password, phone, address };
     console.log(user);
 
-    const res = await axios.post("/api/v1/auth/register", user);
+    const res = await axios.post(`${API_URL}api/v1/auth/register`, user);
     if (res.data.success) {
       console.log(res);
       toast.success(res.data.message);
