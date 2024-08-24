@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3000', // the address of your backend server
+        target: 'https://shopease-gxkt.onrender.com', // the address of your backend server
       }
     }
   },
