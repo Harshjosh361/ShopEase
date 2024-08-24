@@ -19,9 +19,13 @@ app.use(cors());
 
 
 // routes
+app.get('/',(req,res)=>{
+  res.send('<h1>Server is live</h1>');
+});
 app.use('/api/v1/auth',authRoute);
 app.use('/api/v1/category',categoryRoute);
 app.use('/api/v1/products',productRoute);
+
 
 
 
