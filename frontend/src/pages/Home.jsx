@@ -80,8 +80,8 @@ function Home() {
   };
 
   return (
-    <Layout>
-      <div className="container-fluid row mt-3 home-page  bg-gradient-to-r from-blue-100 to-purple-100">
+    <Layout className="w-full  bg-gradient-to-r from-blue-100 to-purple-100">
+      <div className="container-fluid row home-page  bg-gradient-to-r from-blue-100 to-purple-100 w-full -mr-10">
         <div className="col-md-3 filters">
           <h4 className="text-center text-lg font-bold">Filter By Category</h4>
           <div className="d-flex flex-column">
