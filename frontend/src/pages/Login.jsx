@@ -1,76 +1,142 @@
-import React from "react";
-import { useState } from "react";
+'use client';
+
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import Layout from "../component/Layout/Layout";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/auth";
-import {API_URL} from "../config"
+import { API_URL } from "../config";
 
-function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [auth,setAuth] = useAuth();
-  const navigate = useNavigate('/');
+export default function LoginPage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [auth, setAuth] = useAuth();
+  const navigate = useNavigate();
   const location = useLocation();
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = { email, password };
-    console.log(user);
-    const res = await axios.post(`${API_URL}api/v1/auth/login`, user);
-    if (res.data.success) {
-      console.log(res);
-      toast.success(res.data.message);
-      // using context api here
-      setAuth({...auth,user:res.data.user,token:res.data.token});
-      // using local storage here to store the token and user data 
-      localStorage.setItem("auth", JSON.stringify(res.data)); 
-      navigate( location.state ||"/");
-    } else {
-      console.log(res.data.message);
-      toast.error(res.data.message);
+    if (!email || !password) {
+      setError('Please fill in all fields');
+      return;
+    }
+    setError('');
+    setIsLoading(true);
+
+    try {
+      const user = { email, password };
+      const res = await axios.post(`${API_URL}api/v1/auth/login`, user);
+      if (res.data.success) {
+        toast.success(res.data.message);
+        setAuth({ ...auth, user: res.data.user, token: res.data.token });
+        localStorage.setItem("auth", JSON.stringify(res.data));
+        navigate(location.state || "/");
+      } else {
+        setError(res.data.message);
+        toast.error(res.data.message);
+      }
+    } catch (err) {
+      setError('An error occurred. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
+
   return (
     <Layout>
-      <div className="register  flex justify-center items-center flex-col mt-20 w-full">
-          <form onSubmit={(e) => handleSubmit(e)} className=" p-7 mt-4 border rounded-xl w-1/2 ">
-          <h1 className="text-center m-5 text-4xl font-bold">Login</h1>
-            <div className="mb-3 ">
-              <div className="m-2 text-xl">Email:</div>
-              <input
-                type="email"
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-               className="w-full bg-white p-3 m-1 border border-orange-800 rounded-lg"
-                value={email}
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <div className="m-2 text-xl">Password:</div>
-              <input
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
-                type="password"
-                 className="w-full bg-white p-3 m-1 border border-orange-800 rounded-lg"
-                id="exampleInputPassword1"
-                value={password}
-                required
-              />
-            </div>
-            <div className="text-center">
-            <button type="submit" className="text-white bg-orange-600 w-1/2 p-2 hover:bg-orange-400 text-lg rounded-lg" >
-              Login
-            </button>
-            </div>
-            
-          </form>
-        </div>
-      
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-100 to-purple-100">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Card className="w-full max-w-md">
+            <CardHeader>
+              <CardTitle className="text-2xl font-bold">Welcome Back</CardTitle>
+              <CardDescription>Enter your credentials to access your account</CardDescription>
+            </CardHeader>
+            <form onSubmit={handleSubmit}>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input 
+                    id="email" 
+                    type="email" 
+                    placeholder="you@example.com" 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="transition-all duration-200 hover:border-blue-400 focus:ring-2 focus:ring-blue-400"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="password">Password</Label>
+                  <div className="relative">
+                    <Input 
+                      id="password" 
+                      type={showPassword ? "text" : "password"}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      className="pr-10 transition-all duration-200 hover:border-blue-400 focus:ring-2 focus:ring-blue-400"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600"
+                    >
+                      {showPassword ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
+                    </button>
+                  </div>
+                </div>
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Alert variant="destructive">
+                      <AlertDescription>{error}</AlertDescription>
+                    </Alert>
+                  </motion.div>
+                )}
+              </CardContent>
+              <CardFooter>
+                <Button 
+                  type="submit" 
+                  className="w-full transition-all duration-200 hover:bg-blue-600"
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.2 }}
+                      className="flex items-center justify-center"
+                    >
+                      <div className="w-5 h-5 border-t-2 border-b-2 border-white rounded-full animate-spin mr-2"></div>
+                      Logging in...
+                    </motion.div>
+                  ) : (
+                    'Log in'
+                  )}
+                </Button>
+              </CardFooter>
+            </form>
+          </Card>
+        </motion.div>
+      </div>
     </Layout>
-  );  
+  );
 }
-
-export default Login;
