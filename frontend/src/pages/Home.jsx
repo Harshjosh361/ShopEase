@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Prices } from "../component/Prices";
 import { toast } from "react-hot-toast";
 import {API_URL} from "../config"
+import { useAuth } from "@/context/auth";
 
 function Home() {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ function Home() {
   const [checked, setChecked] = useState([]); // categories
   const [radio, setRadio] = useState(0); // price range
   const [cart, setCart] = useCart();
+  const [auth,setAuth] = useAuth();
   
 
   //get all categories
@@ -139,22 +141,25 @@ function Home() {
                       {p.description.substring(0, 60)}...
                     </p>
                     <div className="card-name-price flex gap-2">
-                      <button
+                     {auth.token &&  <button
                         className="btn btn-info ms-1"
                         onClick={() => navigate(`/product/${p.slug}`)}
                       >
                         More Details
                       </button>
+                      &&
                       <button
-                        className="btn btn-dark ms-1"
-                        onClick={() => {
-                          setCart([...cart, p]);
-                          localStorage.setItem("cart", JSON.stringify([...cart, p]));
-                          toast.success("Item Added to cart");
-                        }}
-                      >
-                        ADD TO CART
-                      </button>
+                      className="btn btn-dark ms-1"
+                      onClick={() => {
+                        setCart([...cart, p]);
+                        localStorage.setItem("cart", JSON.stringify([...cart, p]));
+                        toast.success("Item Added to cart");
+                      }}
+                    >
+                      ADD TO CART
+                    </button>
+                      }
+                      
                     </div>
                   </div>
                 </div>
