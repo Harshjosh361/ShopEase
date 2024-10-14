@@ -55,7 +55,7 @@ To run this project locally, follow these steps:
 
    ```bash
     cd ../frontend
-    npm start
+    npm run dev
 ## License
 
 This project is licensed under the terms of the [MIT License](LICENSE).
