@@ -28,7 +28,7 @@ To run this project locally, follow these steps:
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/yourusername/shopease.git
+   git clone https://github.com/Harshjosh361/ShopEase
 2. **Navigate to the project directory:**:
 
    ```bash
@@ -43,7 +43,8 @@ To run this project locally, follow these steps:
 4. **Install the frontend Dependencies**:
 
    ```bash
-   git clone https://github.com/yourusername/shopease.git
+    cd frontend
+    npm install
 
 5. **Run the Backend**:
 
