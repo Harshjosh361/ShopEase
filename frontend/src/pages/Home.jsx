@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import Layout from "../component/Layout/Layout";
 import { Checkbox, Radio } from "antd";
 import axios from "axios";
