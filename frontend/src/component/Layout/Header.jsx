@@ -31,14 +31,14 @@ function Header() {
               style={{ width: "50px", height: "50px" }}
             ></lord-icon>
           </div>
-          <div className="text-3xl font-bold text-gray-800 transition-colors hover:text-gray-900">
-            Shop-Ease
-          </div>
+          <h2 className="font-bold text-3xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          Shop Ease
+        </h2>
         </div>
         <div className="flex p-2 gap-3">
           <NavLink 
             to="/" 
-            className="text-gray-700 hover:text-gray-900 text-lg font-medium transition-colors"
+            className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
           >
             Home
           </NavLink>
@@ -46,13 +46,13 @@ function Header() {
             <>
               <NavLink 
                 to="/register" 
-                className="text-gray-700 hover:text-gray-900 text-lg font-medium transition-colors"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
               >
                 Register
               </NavLink>
               <NavLink 
                 to="/login" 
-                className="text-gray-700 hover:text-gray-900 text-lg font-medium transition-colors"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
               >
                 Login
               </NavLink>
@@ -62,7 +62,7 @@ function Header() {
               {auth.user.role === 1 && (
                 <NavLink
                   to={`/dashboard/${auth?.user?.role === 1 ? "admin" : "user"}`}
-                  className="text-gray-700 hover:text-gray-900 text-lg font-medium transition-colors"
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
                 >
                   Dashboard
                 </NavLink>
@@ -70,7 +70,7 @@ function Header() {
               <NavLink
                 to="/login"
                 onClick={logout}
-                className="text-gray-700 hover:text-gray-900 text-lg font-medium transition-colors"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
               >
                 Logout
               </NavLink>
