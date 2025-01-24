@@ -80,6 +80,12 @@ function Home() {
     console.log(all);
   };
 
+  const handleResetFilter = () => {
+    setChecked([]);
+    setRadio(0);
+    getAllProducts();
+  }
+
 
   return (
     <Layout className="w-full  bg-gradient-to-r from-blue-100 to-purple-100">
@@ -110,7 +116,7 @@ function Home() {
           <div className="d-flex flex-column">
             <button
               className="btn btn-danger mt-4"
-              onClick={() => window.location.reload()}
+              onClick={handleResetFilter}
             >
               RESET FILTERS
             </button>
