@@ -1,9 +1,9 @@
-import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useCart } from "../context/cart";
 import Layout from "../component/Layout/Layout";
+import { toast } from "react-hot-toast";
 import {API_URL} from "../config"
 
 function ProductDetails() {

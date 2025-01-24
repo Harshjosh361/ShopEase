@@ -13,11 +13,11 @@ function Home() {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
   const [checked, setChecked] = useState([]); // categories
   const [radio, setRadio] = useState(0); // price range
   const [cart, setCart] = useCart();
-  const [auth,setAuth] = useAuth();
+  const [auth] = useAuth();
   
 
   //get all categories
@@ -38,6 +38,15 @@ function Home() {
   }, [checked.length, radio.length]);
 
   useEffect(() => {
+    const filterProduct = async () => {
+      try {
+        const { data } = await axios.post(`${API_URL}api/v1/products/product-filters`, { checked, radio });
+        setProducts(data?.products);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     if (checked.length || radio.length) filterProduct();
   }, [checked, radio]);
 
@@ -71,15 +80,6 @@ function Home() {
     console.log(all);
   };
 
-  // get filtered products
-  const filterProduct = async () => {
-    try {
-      const { data } = await axios.post(`${API_URL}api/v1/products/product-filters`, { checked, radio });
-      setProducts(data?.products);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <Layout className="w-full  bg-gradient-to-r from-blue-100 to-purple-100">

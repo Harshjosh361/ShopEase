@@ -7,7 +7,7 @@ import { useCart } from "../../context/cart"
 
 function Header() {
   const [auth, setAuth] = useAuth()
-  const [cart, setCart] = useCart()
+  const [cart] = useCart()
   
   const logout = () => {
     setAuth({ ...auth, user: null, token: "" })
@@ -38,7 +38,7 @@ function Header() {
         <div className="flex p-2 gap-3">
           <NavLink 
             to="/" 
-            className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+            className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent text-lg"
           >
             Home
           </NavLink>
@@ -46,13 +46,13 @@ function Header() {
             <>
               <NavLink 
                 to="/register" 
-                className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent text-lg"
               >
                 Register
               </NavLink>
               <NavLink 
                 to="/login" 
-                className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent text-lg"
               >
                 Login
               </NavLink>
