@@ -1,5 +1,4 @@
 import Layout from "../component/Layout/Layout";
-import React from 'react'
 import { useCart } from "../context/cart";
 import { useAuth } from "../context/auth";
 import { useNavigate } from "react-router-dom";
@@ -7,14 +6,15 @@ import { useState, useEffect } from "react";
 import DropIn from "braintree-web-drop-in-react";
 import axios from "axios";
 import { API_URL } from "../config";
+import { toast } from 'react-toastify';
 
 function CartPage() {
-  const [auth, setAuth] = useAuth();
+  const [auth,] = useAuth();
   const [cart, setCart] = useCart();
   const navigate = useNavigate();
   const [instance, setInstance] = useState("");
   const [clientToken, setClientToken] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [,setLoading] = useState(false);
 
   // TOTAL PRICE
   const totalPrice = () => {
@@ -76,7 +76,7 @@ function CartPage() {
   };
   return (
     <Layout>
-      <div className=" cart-page">
+      <div className="cart-page bg-gradient-to-r from-blue-200 to-purple-200 backdrop-blur-sm bg-opacity-90">
         <div className="row">
           <div className="col-md-12 m-1 p-3 text-pretty">
             <h1 className="text-center bg-light p-4 mb-2">

@@ -1,5 +1,3 @@
-'use client'
-
 import { NavLink } from "react-router-dom"
 import { useAuth } from "../../context/auth"
 import { toast } from "react-hot-toast"
@@ -70,14 +68,14 @@ function Header() {
               <NavLink
                 to="/login"
                 onClick={logout}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent text-lg"
               >
                 Logout
               </NavLink>
               {auth.user.role === 0 && (
                 <NavLink 
                   to="/cart" 
-                  className="text-gray-700 hover:text-gray-900 text-lg font-medium transition-colors"
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent text-lg"
                 >
                   Cart ({cart.length})
                 </NavLink>

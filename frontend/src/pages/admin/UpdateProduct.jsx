@@ -1,4 +1,3 @@
-import React from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import Layout from '../../component/Layout/Layout'
 import AdminMenu from '../../component/Layout/AdminMenu'
@@ -95,7 +94,7 @@ function UpdateProduct() {
     try {
       let answer = window.prompt("Are You Sure want to delete this product ? ");
       if (!answer) return;
-      const { data } = await axios.delete(
+      await axios.delete(
         `${API_URL}api/v1/products/delete-product/${id}`
       );
       toast.success("Product Deleted Successfully");
