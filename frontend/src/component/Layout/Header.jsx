@@ -62,7 +62,7 @@ function Header() {
               {auth.user.role === 1 && (
                 <NavLink
                   to={`/dashboard/${auth?.user?.role === 1 ? "admin" : "user"}`}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent text-lg"
                 >
                   Dashboard
                 </NavLink>
