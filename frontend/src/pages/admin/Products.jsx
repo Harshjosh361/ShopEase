@@ -23,7 +23,7 @@ function Products() {
   useEffect(() => {
     getAllProducts();
     console.log(products)
-  }, []);
+  });
   return (
 
     <Layout>
