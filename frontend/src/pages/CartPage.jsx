@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import DropIn from "braintree-web-drop-in-react";
 import axios from "axios";
 import { API_URL } from "../config";
-import { toast } from 'react-toastify';
+import { toast } from "react-hot-toast"
 
 function CartPage() {
   const [auth,] = useAuth();
