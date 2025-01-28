@@ -92,7 +92,7 @@ function CreateCategory() {
 
   return (
     <Layout>
-      <div className="row">
+      <div className="row bg-gradient-to-r from-blue-100 to-purple-100">
         <div className="col-md-3">
           <AdminMenu />
         </div>

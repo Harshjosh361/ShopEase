@@ -27,7 +27,7 @@ function Products() {
   return (
 
     <Layout>
-      <div className="row dashboard">
+      <div className="row dashboard bg-gradient-to-r from-blue-100 to-purple-100">
         <div className="col-md-3">
           <AdminMenu />
         </div>

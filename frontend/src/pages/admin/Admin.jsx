@@ -7,7 +7,7 @@ function Admin() {
   const [auth] = useAuth();
   return (
     <Layout>
-      <div className="container-fluid">
+      <div className="container-fluid bg-gradient-to-r from-blue-100 to-purple-100">
         <div className="row">
           <div className="col-md-3">
             <AdminMenu/>

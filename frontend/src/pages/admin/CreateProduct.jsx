@@ -68,7 +68,7 @@ function CreateProduct() {
   return (
     <div>
         <Layout>
-      <div className="container-fluid m-3 p-3 dashboard">
+      <div className="container-fluid m-3 p-3 dashboard bg-gradient-to-r from-blue-100 to-purple-100">
         <div className="row">
           <div className="col-md-3">
             <AdminMenu />
